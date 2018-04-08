@@ -1,0 +1,80 @@
+/* Required height of parents of the Half Page Carousel for proper displaying carousel itself */
+html,
+body,
+.view {
+  height: 100%;
+}
+
+/* Half Page Carousel itself*/
+.carousel {
+  height: 50%;
+}
+.carousel .carousel-inner {
+  height: 100%;
+}
+.carousel .carousel-inner .carousel-item,
+.carousel .carousel-inner .active {
+  height: 100%;
+}
+
+/* Adjustment for mobile devices*/
+@media (max-width: 776px) {
+  .carousel {
+    height: 100%;
+  }
+}
+
+/* Navbar animation */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.top-nav-collapse {
+  background-color: #929FBA;
+}
+
+/* Adding color to the Navbar on mobile */
+@media only screen and (max-width: 768px) {
+  .navbar {
+    background-color: #929FBA;
+  }
+}
+
+/* Footer color for sake of consistency with Navbar */
+.page-footer {
+  background-color: #929FBA;
+}
+
+.gradient-custom{
+  background:#3a7bd5;
+  background:-webkit-linear-gradient(to right,#3a6073,#3a7bd5);
+  background:-webkit-gradient(linear,left top,right top,from(#3a6073),to(#3a7bd5));
+  background:-webkit-linear-gradient(left,#3a6073,#3a7bd5);
+  background:-o-linear-gradient(left,#3a6073,#3a7bd5);
+  background:linear-gradient(to right,#3a6073,#3a7bd5)
+}
+
+.card-comments img{
+  width:4rem
+}
+
+.mdi-ul {
+  padding-left: 0;
+  margin-left: 2.14286em;
+  list-style-type: none; 
+}
+.mdi-ul > li {
+  position: relative; 
+}
+
+
+.mdi-li {
+  position: absolute;
+  left: -2.14286em;
+  width: 2.14286em;
+  top: 0.14286em;
+  text-align: center;
+}
+.mdi-li.mdi-lg {
+  left: -1.85714em;
+}

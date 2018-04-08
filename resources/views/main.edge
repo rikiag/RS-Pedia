@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>RS-Pedia</title>
+    <!-- Font Awesome -->
+    {{ css('css/font-awesome.min.css') }}
+    <!-- Bootstrap core CSS -->
+    {{ css('css/bootstrap.min.css') }}
+    <!-- Material Design Bootstrap -->
+    {{ css('css/mdb.min.css') }}
+    <!-- Your custom styles (optional) -->
+    {{ css('css/materialdesignicons.min.css') }}
+    {{ css('css/style.css') }}
+
+    @!section('css')
+</head>
+
+<body>
+
+    @include('inc/navbar')
+
+    @!section('before-content')
+
+    <!--Main layout-->
+    <main>
+        <div class="container">
+
+            <!--Section: Main info-->
+            <section class="mt-5 wow fadeIn">
+
+                @!section('content')
+
+            </section>
+            <!--Section: Main info-->
+
+        </div>
+    </main>
+    <!--Main layout-->
+
+    @include('inc/footer')
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    {{ script('js/jquery-3.2.1.min.js') }}
+    <!-- Bootstrap tooltips -->
+    {{ script('js/popper.min.js') }}
+    <!-- Bootstrap core JavaScript -->
+    {{ script('js/bootstrap.min.js') }}
+    <!-- MDB core JavaScript -->
+    {{ script('js/mdb.min.js') }}
+    <!-- Your custom script (optional) -->
+    {{ script('js/script.js') }}
+
+    @!section('script')
+</body>
+
+</html>
