@@ -8,17 +8,9 @@
   <div class="card-body">
     
     <!-- Material form register -->
-    <form action="{{ route('register') }}" method="post">
+    <form action="{{ route('login') }}" method="post">
         {{ csrfField() }}
-        <p class="h4 text-center mb-4">Sign up</p>
-
-        <!-- Material input text -->
-        <div class="md-form">
-            <i class="fa fa-user prefix grey-text"></i>
-            <input type="text" id="username" class="form-control" name="username" value="{{ old('username', '') }}">
-            <label for="username">Username</label>
-            {{{ hasErrorFor('username') ? '<small id="username" class="form-text text-muted text-danger">'+getErrorFor('username')+'</small>' : '' }}}
-        </div>
+        <p class="h4 text-center mb-4">Sign in</p>
 
         <!-- Material input email -->
         <div class="md-form">
@@ -36,8 +28,13 @@
             {{{ hasErrorFor('password') ? '<small id="password" class="form-text text-muted text-danger">'+getErrorFor('password')+'</small>' : '' }}}
         </div>
 
+        <div class="form-check">
+            <input type="checkbox" name="remember">
+            <label class="form-check-label" for="remember">Remember me</label>
+        </div>
+
         <div class="text-center mt-4">
-            <button class="btn btn-primary" type="submit">Register</button>
+            <button class="btn btn-primary" type="submit">Login</button>
         </div>
     </form>
     <!-- Material form register -->

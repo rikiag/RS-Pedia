@@ -21,7 +21,7 @@
 
                 <!-- Right -->
                 <ul class="navbar-nav ">
-                    <li class="nav-item active">
+                    <li class="nav-item {{ (request.url() == '/') ? 'active' : '' }}">
                         <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
@@ -30,8 +30,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/about">About</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="modal" data-target="#modal-login">Login</a>
+                    <li class="nav-item {{ (request.url() == '/login' || '/register') ? 'active' : '' }}">
+                        <a class="nav-link" href="/login">Login</a>
                     </li>
                 </ul>
 

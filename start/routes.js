@@ -16,8 +16,11 @@
 const Route = use('Route')
 
 Route.on('/').render('home/index')
+Route.get('dashboard', 'DashboardController.index').as('dashboard')
 
 Route.get('register', 'Auth/RegisterController.showRegisterForm')
 Route.post('register', 'Auth/RegisterController.register').as('register')
 Route.get('register/confirm/:token', 'Auth/RegisterController.confirmEmail')
-
+Route.get('login', 'Auth/LoginController.showLoginForm')
+Route.post('login', 'Auth/LoginController.login').as('login')
+Route.get('logout', 'Auth/AuthenticatedController.logout')

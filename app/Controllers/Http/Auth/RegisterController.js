@@ -48,7 +48,7 @@ class RegisterController {
 			}
 		})
 
-		return response.redirect('back')
+		return response.redirect('/login')
 	}
 
 	async confirmEmail ({ params, session, response}){
