@@ -30,9 +30,20 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/about">About</a>
                     </li>
-                    <li class="nav-item {{ (request.url() == '/login' || '/register') ? 'active' : '' }}">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
+                    @loggedIn
+                        <li class="nav-item dropdown {{ (request.url() == '/dashboard' || request.url() == '/setting') ? 'active' : '' }}">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{ auth.user.username }} </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                                <a class="dropdown-item {{ (request.url() == '/dashboard') ? 'active' : '' }}" href="/dashboard">My Thread</a>
+                                <a class="dropdown-item {{ (request.url() == '/setting') ? 'active' : '' }}" href="/setting">Setting</a>
+                                <a class="dropdown-item" href="/logout">Log out</a>
+                            </div>
+                        </li>
+                    @else
+                        <li class="nav-item {{ (request.url() == '/login' || request.url() == '/register') ? 'active' : '' }}">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                    @endloggedIn
                 </ul>
 
             </div>
