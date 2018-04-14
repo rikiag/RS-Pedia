@@ -1,0 +1,51 @@
+@layout('main')
+
+@section('content')
+<div class="row">
+<div class="col-md-6 offset-md-3">
+    @include('inc/notification')
+<div class="card">
+  <div class="card-body">
+    
+    <!-- Material form register -->
+    <form action="/password/reset" method="post">
+        {{ csrfField() }}
+        <input type="hidden" name="token" value="{{ token }}">
+        <p class="h4 text-center mb-4">Reset Password</p>
+
+        <!-- Material input email -->
+        <div class="md-form">
+            <i class="fa fa-envelope prefix grey-text"></i>
+            <input type="email" id="email" class="form-control" name="email" value="{{ old('email', '') }}">
+            <label for="email">Email</label>
+            {{{ hasErrorFor('email') ? '<small id="email" class="form-text text-muted text-danger">'+getErrorFor('email')+'</small>' : '' }}}
+        </div>
+
+        <!-- Material input password -->
+        <div class="md-form">
+            <i class="fa fa-lock prefix grey-text"></i>
+            <input type="password" id="password" class="form-control" name="password">
+            <label for="password">Password</label>
+            {{{ hasErrorFor('password') ? '<small id="password" class="form-text text-muted text-danger">'+getErrorFor('password')+'</small>' : '' }}}
+        </div>
+
+        <!-- Material input password -->
+        <div class="md-form">
+            <i class="fa fa-lock prefix grey-text"></i>
+            <input type="password" id="password_confirmation" class="form-control" name="password_confirmation">
+            <label for="password_confirmation">Confirm Password</label>
+            {{{ hasErrorFor('password_confirmation') ? '<small id="password_confirmation" class="form-text text-muted text-danger">'+getErrorFor('password_confirmation')+'</small>' : '' }}}
+        </div>
+
+        <div class="text-center mt-4">
+            <button class="btn btn-primary" type="submit">Reset Password</button>
+        </div>
+    </form>
+    <!-- Material form register -->
+                      
+  </div>
+</div>
+</div>
+</div>
+
+@endsection

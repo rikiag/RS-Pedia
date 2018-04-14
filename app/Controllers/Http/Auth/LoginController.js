@@ -27,7 +27,7 @@ class LoginController {
 				// login user
 				await auth.remember(!!remember).login(user)
 
-				return response.route('home')
+				return response.route('dashboard')
 				
 			}
 		}

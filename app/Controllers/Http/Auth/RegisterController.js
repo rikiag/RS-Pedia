@@ -36,7 +36,7 @@ class RegisterController {
 		await Mail.send('auth.emails.confirm_email', user.toJSON(), message => {
 			message
 				.to(user.email)
-				.from('RS-Pedia Register Form')
+				.from('noreplay@rspedia.com')
 				.subject('Please confirm your email address')
 		})
 
