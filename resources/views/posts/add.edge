@@ -1,0 +1,44 @@
+@layout('main')
+
+@section('content')
+
+    <div class="card">
+        <div class="card-body">
+
+            <form action="thread.html">
+
+                <div class="md-form">
+                    <input type="text" id="titleForm" class="form-control">
+                    <label for="titleForm">Title</label>
+                </div>
+
+                <textarea name="post" id="editor" rows="10"></textarea>
+
+                <button class="btn btn-primary pull-right">Tambah</button>
+
+            </form>
+
+        </div>
+    </div>
+
+@endsection
+
+@section('css')
+
+
+
+@endsection
+
+@section('script')
+
+    {{ script('js/ckeditor.js') }}
+    {{ script('js/sample.js') }}
+    <!-- Initializations -->
+    <script type="text/javascript">
+        initSample();
+
+
+
+    </script>
+
+@endsection
