@@ -16,6 +16,8 @@
 const Route = use('Route')
 
 Route.get('/', 'HomeController.index').as('home')
+Route.get('detail/:placeId', 'HomeController.detail')
+
 Route.get('dashboard', 'DashboardController.index').as('dashboard').middleware(['auth'])
 
 Route.get('register', 'Auth/RegisterController.showRegisterForm').middleware(['authenticated'])

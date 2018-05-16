@@ -37,26 +37,29 @@
 
     </div>
     <!--/.Carousel Wrapper-->
-@endsection
-
-@section('content')
-
-				<!--Card group-->
-                <div class="card-deck" id="results">
-
-                </div>
-                <!--Card group-->
 
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
                 <div class="modal-body text-center">
-                    <img src="{{ assetsUrl('img/gif/loading.gif') }}" class="img-responsive center-block" />
+                    <img src="{{ assetsUrl('img/gif/loading.gif') }}" />
                 </div>
+
             </div>
         </div>
     </div>
+@endsection
+
+@section('content')
+
+	<!--Card group-->
+    <div class="card-deck" id="results">
+
+    </div>
+    <!--Card group-->
+
+    
 
 @endsection
 
@@ -96,23 +99,36 @@
 
                     for (var i = 0; i < results.length; i++) {
 
-                        //container.innerHTML += results[i].name + '<br />';
                         container.innerHTML += '<div class="col-md-4">\
                             <div class="card mb-4">\
                                 <div class="view overlay">\
                                     <img class="img-fluid" src="img/16.jpg" alt="Card image cap">\
-                                    <a  data-toggle="modal" data-target=".bd-example-modal-lg">\
+                                    <a onclick=getDetail(\"' + results[i].place_id + '\") data-toggle="modal" data-target=".bd-example-modal-lg">\
                                         <div class="mask rgba-white-slight"></div>\
                                     </a>\
                                 </div>\
                                 <div class="card-body">\
-                                    <h4 class="card-title" data-toggle="modal" data-target=".bd-example-modal-lg">' + results[i].name +'</h4>\
+                                    <h4 onclick=getDetail(\"' + results[i].place_id + '\") class="card-title" data-toggle="modal" data-target=".bd-example-modal-lg">' + results[i].name +'</h4>\
                                 </div>\
                             </div>\
-                        </div>'
+                        </div>';
                     }
                 }
             }
         }
+
+        function getDetail (id) {
+            var url = window.location.href+'detail/'+id;
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "html",
+                data: {id : id},
+                success: function(data){
+                    $(".modal-content").html(data);
+                }
+            });
+        };
     </script>
 @endsection
