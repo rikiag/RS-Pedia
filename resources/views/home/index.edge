@@ -226,6 +226,8 @@
                 </div>
                 <!--Card group-->
 
+                <div id="results"></div>
+
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -327,4 +329,33 @@
         </div>
     </div>
 
+@endsection
+
+@section('script')
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ mapsApi }}&libraries=places&callback=initialize"></script>
+    <script>
+        function initialize() {
+        var request = {
+            location: new google.maps.LatLng(5.555920, 95.321778),
+            radius: '800',
+            types: ['hospital']
+        };
+
+        var container = document.getElementById('results');
+
+        var service = new google.maps.places.PlacesService(container);
+        service.nearbySearch(request, callback);
+
+        function callback(results, status) {
+
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+
+                for (var i = 0; i < results.length; i++) {
+
+                    container.innerHTML += results[i].name + '<br />';
+                }
+            }
+        }
+    }
+    </script>
 @endsection
