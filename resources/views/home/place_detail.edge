@@ -1,15 +1,15 @@
 <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLongTitle">{{ placeId }}</h5>
+    <h5 class="modal-title" id="modalTitle"></h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div id="carouselndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselndicators" data-slide-to="1"></li>
+            <li data-target="#carouselndicators" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -22,11 +22,11 @@
                 <img class="d-block w-100" src="img/79.jpg" alt="Third slide">
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#carouselndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#carouselndicators" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
@@ -37,10 +37,22 @@
     <div class="row">
         <div class="col-md-10 offset-md-1">
             <ul class="mdi-ul">
-                <li><i class="mdi-li mdi mdi-map-marker grey-text"></i>Jalan Tgk. Daud Beureueh No.108, Bandar Baru, Kuta Alam, Bandar Baru, Kuta Alam, Kota Banda Aceh, Aceh 24415</li>
-                <li><i class="mdi-li mdi mdi-earth grey-text"></i>rsudza.acehprov.go.id</li>
-                <li><i class="mdi-li mdi mdi-phone grey-text"></i>(0651) 22616</li>
-                <li><i class="mdi-li mdi mdi-clock grey-text"></i>Buka 24 jam</li>
+                <li>
+                    <i class="mdi-li mdi mdi-map-marker grey-text"></i>
+                    <p id="address"> - </p>
+                </li>
+                <li>
+                    <i class="mdi-li mdi mdi-earth grey-text"></i>
+                    <p id="website"> - </p>
+                </li>
+                <li>
+                    <i class="mdi-li mdi mdi-phone grey-text"></i>
+                    <p id="phone"> - </p>
+                </li>
+                <!-- <li>
+                    <i class="mdi-li mdi mdi-clock grey-text"></i>
+                    Buka 24 jam
+                </li> -->
             </ul>
         </div>
     </div>
@@ -49,34 +61,19 @@
         <div class="col-6">
             <a class="btn btn-primary btn-lg btn-block">Petunjuk Arah</a>
         </div>
-        <div class="col-6"><a href="forum-rs.html" class="btn btn-primary btn-lg btn-block">Lihat Forum</a></div>
+        <div class="col-6"><a href="/forum/{{ placeId }}" class="btn btn-primary btn-lg btn-block">Lihat Forum</a></div>
     </div>
 
     <br>
 
     <div class="row">
         <div class="col-12">
-            Comments
             <div class="card card-comments mb-3 wow fadeIn">
                 <div class="card-header font-weight-bold">Ulasan</div>
                 <div class="card-body">
+                    <div class="reviewsContent" id="reviewsContent"></div>
+                    <div id="service-helper"></div>
 
-                    <div class="media d-block d-md-flex mt-4">
-                        <img class="d-flex mb-3 mx-auto " src="img/img (20).jpg" alt="Generic placeholder image">
-                        <div class="media-body text-center text-md-left ml-md-3 ml-0">
-                            <h5 class="mt-0 font-weight-bold">Miley Steward </h5>
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        </div>
-                    </div>
-                    <div class="media d-block d-md-flex mt-3">
-                        <img class="d-flex mb-3 mx-auto " src="img/img (30).jpg" alt="Generic placeholder image">
-                        <div class="media-body text-center text-md-left ml-md-3 ml-0">
-                            <h5 class="mt-0 font-weight-bold">Caroline Horwitz </h5>
-                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
-                        </div>
-                    </div>
-
-                    Quick Reply
                     <div class="form-group mt-4">
                         <label for="quickReplyFormComment">Tambahkan Ulasan</label>
                         <textarea class="form-control" id="quickReplyFormComment" rows="3"></textarea>
@@ -88,7 +85,50 @@
 
                 </div>
             </div>
-            /.Comments
         </div>
     </div>
 </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOA5QwF0DPgwTPDzxT1xBu55gWibtvdik&libraries=places&callback=getRelevantGoogleReviews">
+</script>
+<script type="text/javascript">
+   function getRelevantGoogleReviews(){
+     var service = new google.maps.places.PlacesService($('#service-helper').get(0));
+     // note that it removes the content inside div with tag '#service-helper'
+
+     service.getDetails({
+         placeId: '{{ placeId }}'
+         // get a placeId using https://developers.google.com/places/web-service/place-id
+        }, function(place, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                console.log(place);
+
+                var resultReview = '';
+                if (place.reviews) {
+                    for (i=0; i<place.reviews.length; ++i) {
+                        var reviewDate = new Date(place.reviews[i].time * 1000);
+                        var reviewDateMM = reviewDate.getMonth() + 1;
+                        var reviewDateFormatted = reviewDate.getDate() + '/' + reviewDateMM + '/' + reviewDate.getFullYear();
+
+                        resultReview += '<div class="media d-block d-md-flex mt-4">';
+                        resultReview += '<img class="d-flex mb-3 mx-auto " src="' + place.reviews[i].profile_photo_url + '" alt="Generic placeholder image">';
+                        resultReview += '<div class="media-body text-center text-md-left ml-md-3 ml-0">';
+                        resultReview += '<span><span class="mt-0 font-weight-bold">' + place.reviews[i].author_name + '</span> - <i>' + reviewDateFormatted + '</i></span><br>';
+                        resultReview += place.reviews[i].text;
+                        resultReview += '</div>';
+                        resultReview += '</div>';
+                        resultReview += '<hr>';
+                    }
+                    $('#reviewsContent').append(resultReview);
+                }
+
+                $('#modalTitle').append(place.name);
+                $('#address').append(place.formatted_address);
+                $('#website').append(place.website);
+                $('#phone').append(place.international_phone_number);
+            }
+        });
+    }
+</script>
