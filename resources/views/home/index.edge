@@ -96,13 +96,14 @@
             function callback(results, status) {
 
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
-
                     for (var i = 0; i < results.length; i++) {
+                        
+                        img = (results[i].photos) ? results[i].photos[0].getUrl({'maxWidth': 350, 'maxHeight': 200}) : 'img/16.jpg';
 
                         container.innerHTML += '<div class="col-md-4">\
                             <div class="card mb-4">\
                                 <div class="view overlay">\
-                                    <img class="img-fluid" src="img/16.jpg" alt="Card image cap">\
+                                    <img class="img-fluid rounded mx-auto d-block" src="'+ img +'" alt="Card image cap" >\
                                     <a onclick=getDetail(\"' + results[i].place_id + '\") data-toggle="modal" data-target=".bd-example-modal-lg">\
                                         <div class="mask rgba-white-slight"></div>\
                                     </a>\

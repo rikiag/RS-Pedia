@@ -7,12 +7,12 @@
 <div class="modal-body">
     <div id="carouselndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carouselndicators" data-slide-to="0" class="active"></li>
+            <!-- <li data-target="#carouselndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselndicators" data-slide-to="1"></li>
-            <li data-target="#carouselndicators" data-slide-to="2"></li>
+            <li data-target="#carouselndicators" data-slide-to="2"></li> -->
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active">
+            <!-- <div class="carousel-item active">
                 <img class="d-block w-100" src="img/77.jpg" alt="First slide">
             </div>
             <div class="carousel-item">
@@ -20,7 +20,7 @@
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="img/79.jpg" alt="Third slide">
-            </div>
+            </div> -->
         </div>
         <a class="carousel-control-prev" href="#carouselndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -103,9 +103,10 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOA5QwF0DPgwTPDzxT1xBu55g
          // get a placeId using https://developers.google.com/places/web-service/place-id
         }, function(place, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
-                console.log(place);
 
                 var resultReview = '';
+                var carouselndicator = '';
+                var carouseltem = '';
                 if (place.reviews) {
                     for (i=0; i<place.reviews.length; ++i) {
                         var reviewDate = new Date(place.reviews[i].time * 1000);
@@ -122,6 +123,23 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOA5QwF0DPgwTPDzxT1xBu55g
                         resultReview += '<hr>';
                     }
                     $('#reviewsContent').append(resultReview);
+                }
+
+                if (place.photos) {
+                    for (i = 0; i < place.photos.length; i++) {
+                        if (i == 0) {
+                            carouselndicator += '<li data-target="#carouselndicators" data-slide-to="'+i+'" class="active"></li>';
+                            carouseltem += '<div class="carousel-item active">';
+                        }
+                        else{
+                            carouselndicator += '<li data-target="#carouselndicators" data-slide-to="'+i+'"></li>';
+                            carouseltem += '<div class="carousel-item ">';
+                        }
+                        carouseltem += '<img class="img-fluid rounded mx-auto d-block" src="'+ place.photos[i].getUrl({'maxWidth': 800, 'maxHeight': 500}) +'" alt="Gambar tidak tersedia">';
+                        carouseltem += '</div>';
+                    }
+                    $('.carousel-indicators').append(carouselndicator);
+                    $('.carousel-inner').append(carouseltem);
                 }
 
                 $('#modalTitle').append(place.name);
