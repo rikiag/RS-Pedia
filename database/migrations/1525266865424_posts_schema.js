@@ -7,6 +7,7 @@ class PostsSchema extends Schema {
     this.create('posts', (table) => {
       table.increments()
       table.string('title')
+      table.string('place_id')
       table.string('slug')
       table.text('body')
       table.string('featured_img')
