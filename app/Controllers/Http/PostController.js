@@ -17,20 +17,16 @@ class PostController {
 			size: '2mb'
 		})
 
-		await featuredImg.move(Helpers.publicPath('img/posts'))
-
-		if (!featuredImg.moved()) {
-			return featuredImg.error()
-		}
-		return 'File moved'
+		await featuredImg.move(Helpers.publicPath('img/posts'), {
+			name: request.input('title')+'.'+featuredImg.subtype
+		})
 
 		const post = new Post()
 
 		post.title        = request.input('title')
 		post.place_id     = request.input('place_id')
-		post.slug         = request.input('title')
 		post.body         = request.input('body')
-		post.featured_img = featuredImg.clientName
+		post.featured_img = featuredImg.fileName
 		post.user_id      = request.input('id')
 
 		await post.save()
