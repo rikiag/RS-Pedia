@@ -33,5 +33,6 @@ Route.post('password/reset', 'Auth/PasswordResetController.reset')
 
 Route.get('post/add', 'PostController.add').middleware(['auth'])
 Route.post('post/add', 'PostController.store').as('addPost').middleware(['auth'])
+Route.get('post/view/:slug', 'PostController.view')
 
 Route.get('forum', 'PostController.index').as('forum')

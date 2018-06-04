@@ -1,6 +1,7 @@
 'use strict'
 
 const Post = use('App/Models/Post')
+const User = use('App/Models/User')
 const Helpers = use('Helpers')
 
 
@@ -49,6 +50,16 @@ class PostController {
 		})
 
 		return response.redirect('/dashboard')
+	}
+
+	async view ({ params, view }){
+		const post = await Post.findBy('slug', params.slug)
+		const author = await User.find(post.user_id)
+
+		return view.render('posts.view', {
+			post:post.toJSON(),
+			author: author.toJSON()
+		})
 	}
 }
 
