@@ -6,6 +6,16 @@ const Helpers = use('Helpers')
 
 class PostController {
 
+	async index({ view }){
+		const posts = await Post.all()
+
+		console.log(posts)
+
+		return view.render('posts.index', {
+			posts: posts.toJSON()
+		})
+	}
+
 	async add({ view }){
 		return view.render('posts.add')
 	}

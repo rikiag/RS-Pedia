@@ -14,7 +14,7 @@
                             <div class="card-body">
                                 @include('inc/notification')
 
-                                <h1>Tulisan Saya <span><a href="/post/add" class="btn btn-primary pull-right">Tambah</a></span></h1>
+                                <h1>My Thread <span><a href="/post/add" class="btn btn-primary pull-right">Add New</a></span></h1>
 
                                 <hr>
 
@@ -31,7 +31,7 @@
                                         <tr>
                                             <td>{{ ($loop.index + 1) }}</td>
                                             <td>{{ post.title }}</td>
-                                            <td width="300px">
+                                            <td width="270px">
                                                 <a href="/post/view/{{ post.slug }}" target="_blank" class="btn btn-sm btn-primary">View</a>
                                                 <a href="/post/edit/{{ post.id }}" class="btn btn-sm btn-success">Edit</a>
                                                 <a href="/post/delete/{{ post.id }}" class="btn btn-sm btn-danger">Delete</a>

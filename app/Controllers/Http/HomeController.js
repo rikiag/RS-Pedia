@@ -6,11 +6,16 @@ class HomeController {
 	index({view}){
 		const mapsApi = Env.get('MAPS_API')
 
-		return view.render('home.index', mapsApi)
+		return view.render('home.index', {mapsApi : mapsApi})
 	}
 
 	detail ({ params, view }){
-		return view.render('home.place_detail', { placeId: params.placeId })
+		const mapsApi = Env.get('MAPS_API')
+		
+		return view.render('home.place_detail', {
+			placeId: params.placeId,
+			mapsApi : mapsApi
+		})
 	}
 }
 
