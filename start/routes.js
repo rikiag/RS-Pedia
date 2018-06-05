@@ -37,4 +37,6 @@ Route.get('post/edit/:id', 'PostController.edit').middleware(['auth'])
 Route.post('post/edit', 'PostController.update').as('updatePost').middleware(['auth'])
 Route.get('post/view/:slug', 'PostController.view')
 
+Route.delete('posts/:id', 'PostController.delete').middleware(['auth'])
+
 Route.get('forum', 'PostController.index').as('forum')
