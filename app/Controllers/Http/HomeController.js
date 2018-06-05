@@ -17,6 +17,10 @@ class HomeController {
 			mapsApi : mapsApi
 		})
 	}
+
+	about({view}){
+		return view.render('home.about')
+	}
 }
 
 module.exports = HomeController

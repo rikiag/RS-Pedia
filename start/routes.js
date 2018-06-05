@@ -43,3 +43,5 @@ Route.get('forum', 'PostController.index').as('forum')
 
 Route.get('setting', 'DashboardController.setting').as('setting').middleware(['auth'])
 Route.post('setting', 'DashboardController.updateProfile').as('updateProfile').middleware(['auth'])
+
+Route.get('about', 'HomeController.about')
