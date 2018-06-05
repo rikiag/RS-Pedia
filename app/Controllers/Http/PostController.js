@@ -61,6 +61,44 @@ class PostController {
 			author: author.toJSON()
 		})
 	}
+
+	async edit({ view, params }){
+		const post = await Post.find(params.id)
+
+		return view.render('posts.edit', {
+			post: post
+		})
+	}
+
+	async update({ request, response, session }){
+		const featuredImg = request.file('featured_img', {
+			types: ['image'],
+			size: '2mb'
+		})
+
+		await featuredImg.move(Helpers.publicPath('img/posts'), {
+			name: request.input('title')+'.'+featuredImg.subtype
+		})
+
+		const post = await Post.find(request.input('id'))
+
+		post.title        = request.input('title')
+		post.place_id     = request.input('place_id')
+		post.body         = request.input('body')
+		post.featured_img = featuredImg.fileName
+		post.user_id      = request.input('u_id')
+
+		await post.save()
+
+		session.flash({
+			notification: {
+				type: 'success',
+				message: 'Post Updated!'
+			}
+		})
+
+		return response.redirect('/dashboard')
+	}
 }
 
 module.exports = PostController
