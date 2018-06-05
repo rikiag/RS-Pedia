@@ -12,8 +12,9 @@
 
                             <!--Card content-->
                             <div class="card-body">
+                                @include('inc/notification')
 
-                                <h1>Tulisan Saya <span><a href="tambah.html" class="btn btn-primary pull-right">Tambah</a></span></h1>
+                                <h1>My Thread <span><a href="/post/add" class="btn btn-primary pull-right">Add New</a></span></h1>
 
                                 <hr>
 
@@ -22,17 +23,28 @@
                                         <tr>
                                             <th width="10px">#</th>
                                             <th>Title</th>
+                                            <th colspan="3">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @each(post in posts)
                                         <tr>
-                                            <td>1</td>
-                                            <td>Lorem ipsum dolor sit amet</td>
+                                            <td>{{ ($loop.index + 1) }}</td>
+                                            <td>{{ post.title }}</td>
+                                            <td width="100px">
+                                                <a href="/post/view/{{ post.slug }}" target="_blank" class="btn btn-sm btn-primary">View</a>
+                                            </td>
+                                            <td width="100px">
+                                                <a href="/post/edit/{{ post.id }}" class="btn btn-sm btn-success">Edit</a>
+                                            </td>
+                                            <td width="100px">
+                                                <form action="{{ '/posts/' + post.id + '?_method=DELETE' }}" method="POST">
+                                                    {{ csrfField() }}
+                                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                                </form>
+                                            </td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>consectetur adipisicing elit doloremque</td>
-                                        </tr>
+                                        @endeach
                                     </tbody>
                                 </table>
 

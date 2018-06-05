@@ -64,7 +64,7 @@
 @endsection
 
 @section('script')
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOA5QwF0DPgwTPDzxT1xBu55gWibtvdik&libraries=places&callback=initialize"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ mapsApi }}&libraries=places&callback=initialize"></script>
     <script>
         function initialize() {
 
@@ -131,5 +131,12 @@
                 }
             });
         };
+
+        //remove data modal
+        $('body').on('hidden.bs.modal', '.modal', function () {
+            $(this).removeData('bs.modal');
+            $(".modal-content").html('<div class="modal-body text-center"><img src="/img/gif/loading.gif" /></div>');
+        });
+        $.fn.modal.Constructor.prototype.enforceFocus = function() {};
     </script>
 @endsection

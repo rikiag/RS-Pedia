@@ -1,0 +1,126 @@
+@layout('main')
+
+@section('before-content')
+	<!--Carousel Wrapper-->
+        <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+
+            <!--Slides-->
+            <div class="carousel-inner" role="listbox">
+
+                <!--First slide-->
+                <div class="carousel-item active">
+                    <div class="view" style="background-image: url('/img/posts/{{ post.featured_img  }}'); background-repeat: no-repeat; background-size: cover;">
+                        <!-- Mask & flexbox options-->
+                        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+                            <!-- Content -->
+                            <div class="text-center white-text mx-5 wow fadeIn">
+                                <h1 class="mb-4">
+                                    <strong>{{ post.title }}</strong>
+                                </h1>
+
+                            </div>
+                            <!-- Content -->
+
+                        </div>
+                        <!-- Mask & flexbox options-->
+
+                    </div>
+                </div>
+                <!--/First slide-->
+
+            </div>
+            <!--/.Slides-->
+
+        </div>
+        <!--/.Carousel Wrapper-->
+@endsection
+
+@section('content')
+	<!--Card-->
+                        <div class="card mb-4 wow fadeIn">
+
+                            <!--Card content-->
+                            <div class="card-body">
+
+                                {{{ post.body }}}
+
+                            </div>
+
+                        </div>
+                        <!--/.Card-->
+
+                        <!--Card-->
+                        <div class="card mb-4 wow fadeIn">
+
+                            <div class="card-header font-weight-bold">
+                                <span>About author</span>
+                                <span class="pull-right">
+                                    <a href="{{ author.fb }}" target="_blank">
+                                        <i class="fa fa-facebook mr-2"></i>
+                                    </a>
+                                    <a href="{{ author.tw }}" target="_blank">
+                                        <i class="fa fa-twitter mr-2"></i>
+                                    </a>
+                                    <a href="{{ author.ig }}" target="_blank">
+                                        <i class="fa fa-instagram mr-2"></i>
+                                    </a>
+                                    <a href="{{ author.in }}" target="_blank">
+                                        <i class="fa fa-linkedin mr-2"></i>
+                                    </a>
+                                </span>
+                            </div>
+
+                            <!--Card content-->
+                            <div class="card-body">
+
+                                <div class="media d-block d-md-flex mt-3">
+                                    <img class="d-flex mb-3 mx-auto z-depth-1" src="/img/users/{{ author.photo }}" alt="Generic placeholder image"
+                                        style="width: 100px;">
+                                    <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                                        <h5 class="mt-0 font-weight-bold">{{ author.username }}
+                                        </h5>
+                                        {{ author.desc }}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!--/.Card-->
+
+                        <!--Comments-->
+                        <div class="card card-comments mb-3 wow fadeIn">
+                            <div class="card-header font-weight-bold">Comments</div>
+                            <div class="card-body">
+
+                                <div id="disqus_thread"></div>
+
+                            </div>
+                        </div>
+                        <!--/.Comments-->
+
+                        
+@endsection
+
+@section('script')
+	<script>
+
+		/**
+		*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+		*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+		/*
+		var disqus_config = function () {
+		this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+		};
+		*/
+		(function() { // DON'T EDIT BELOW THIS LINE
+			var d = document, s = d.createElement('script');
+			s.src = 'https://rs-pedia.disqus.com/embed.js';
+			s.setAttribute('data-timestamp', +new Date());
+			(d.head || d.body).appendChild(s);
+		})();
+	</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+@endsection

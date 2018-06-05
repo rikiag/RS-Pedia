@@ -1,0 +1,122 @@
+@layout('main')
+
+@section('content')
+
+    <div class="card">
+        <div class="card-body">
+
+            <form action="{{ route('addPost') }}" method="post" enctype="multipart/form-data">
+
+                <div class="row">
+                    {{ csrfField() }}
+                    <input type="hidden" name="id" value="{{ auth.user.id }}">
+                    <div class="col-md-8">
+                        <div class="md-form">
+                            <input type="text" id="titleForm" class="form-control" name="title" required>
+                            <label for="titleForm">Title</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="results">Hospital: </label>
+                            <select class="form-control" id="results" name="place_id">
+                            </select>
+                        </div>
+
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <img id="blah" src="" alt="Featured Image" />
+                        <input type='file' onchange="readURL(this);" name="featured_img" />
+
+                        
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <textarea id="editor" rows="10" name="body"></textarea>
+                        <br>
+                        <button class="btn btn-primary pull-right">Add</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+@endsection
+
+@section('css')
+    {{ css('summernote/dist/summernote-bs4.css') }}
+    <!-- <link rel='stylesheet' id='compiled.css-css'  href='https://mdbootstrap.com/wp-content/themes/mdbootstrap4/css/compiled.min.css' type='text/css' media='all' /> -->
+    <style>
+        img{
+            max-width:180px;
+        }
+    </style>
+@endsection
+
+@section('script')
+    <!-- <script type='text/javascript' src='https://mdbootstrap.com/wp-content/themes/mdbootstrap4/js/compiled.min.js?ver=4.5.0'></script> -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOA5QwF0DPgwTPDzxT1xBu55gWibtvdik&libraries=places&callback=initialize"></script>
+
+    {{ script('summernote/dist/summernote-bs4.js') }}
+
+
+    <script>
+        function initialize() {
+
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    getPlaces(position.coords.latitude, position.coords.longitude)
+                }, function() {
+                    getPlaces(5.555920, 95.321778)
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                getPlaces(5.555920, 95.321778)
+            }
+        }
+
+        function getPlaces(lat, lng) {
+            var request = {
+                location: new google.maps.LatLng(lat, lng),
+                radius: '1000',
+                types: ['hospital']
+            };
+
+            var container = document.getElementById('results');
+
+            var service = new google.maps.places.PlacesService(container);
+            service.nearbySearch(request, callback);
+
+            function callback(results, status) {
+
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    for (var i = 0; i < results.length; i++) {
+
+                        container.innerHTML += '<option value="'+ results[i].place_id +'">'+ results[i].name +'</option>';
+                    }
+                }
+            }
+        }
+
+        $('#editor').summernote();
+            $('.mdb-select').material_select();
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#blah')
+                        .attr('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+    </script>
+
+@endsection

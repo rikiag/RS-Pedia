@@ -30,3 +30,18 @@ Route.get('password/reset', 'Auth/PasswordResetController.showLinkRequestForm')
 Route.post('password/email', 'Auth/PasswordResetController.sendResetLinkEmail')
 Route.get('password/reset/:token', 'Auth/PasswordResetController.showResetForm')
 Route.post('password/reset', 'Auth/PasswordResetController.reset')
+
+Route.get('post/add', 'PostController.add').middleware(['auth'])
+Route.post('post/add', 'PostController.store').as('addPost').middleware(['auth'])
+Route.get('post/edit/:id', 'PostController.edit').middleware(['auth'])
+Route.post('post/edit', 'PostController.update').as('updatePost').middleware(['auth'])
+Route.get('post/view/:slug', 'PostController.view')
+
+Route.delete('posts/:id', 'PostController.delete').middleware(['auth'])
+
+Route.get('forum', 'PostController.index').as('forum')
+
+Route.get('setting', 'DashboardController.setting').as('setting').middleware(['auth'])
+Route.post('setting', 'DashboardController.updateProfile').as('updateProfile').middleware(['auth'])
+
+Route.get('about', 'HomeController.about')
