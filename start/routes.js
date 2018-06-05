@@ -40,3 +40,6 @@ Route.get('post/view/:slug', 'PostController.view')
 Route.delete('posts/:id', 'PostController.delete').middleware(['auth'])
 
 Route.get('forum', 'PostController.index').as('forum')
+
+Route.get('setting', 'DashboardController.setting').as('setting').middleware(['auth'])
+Route.post('setting', 'DashboardController.updateProfile').as('updateProfile').middleware(['auth'])

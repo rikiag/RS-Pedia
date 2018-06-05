@@ -1,0 +1,97 @@
+@layout('main')
+
+@section('content')
+<!--Grid row-->
+    <div class="row">
+
+        <!--Grid column-->
+        <div class="col-md-10 offset-md-1">
+
+            <!--Card-->
+            <div class="card mb-4 wow fadeIn">
+
+                <div class="card-body">
+                    @include('inc/notification')
+                    <!-- Default form register -->
+                    <form action="{{ route('updateProfile') }}" method="POST" enctype="multipart/form-data">
+                        {{ csrfField() }}
+                        <p class="h4 text-center mb-4">Setting</p>
+
+                        <!-- Default input name -->
+                        <label for="username" class="grey-text">Name</label>
+                        <input type="text" id="username" name="username" class="form-control" value="{{ user.username }}">
+                        
+                        <br>
+
+                        <!-- Default input email -->
+                        <label for="email" class="grey-text">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" value="{{ user.email }}">
+                        <br>
+
+                        <label for="desc" class="grey-text">Description</label>
+                        <textarea rows="10" name="desc" class="form-control">{{ user.desc }}</textarea>
+                        
+                        <hr>
+                        <!-- Default input email -->
+                        <label for="fb" class="grey-text">Facebook</label>
+                        <input type="text" id="fb" name="fb" class="form-control" value="{{ user.fb }}">
+                        <br>
+
+                        <!-- Default input email -->
+                        <label for="tw" class="grey-text">Twitter</label>
+                        <input type="text" id="tw" name="tw" class="form-control" value="{{ user.tw }}">
+                        <br>
+
+                        <!-- Default input email -->
+                        <label for="ig" class="grey-text">Instagram</label>
+                        <input type="text" id="ig" name="ig" class="form-control" value="{{ user.ig }}">
+                        <br>
+
+                        <!-- Default input email -->
+                        <label for="in" class="grey-text">Linkedin</label>
+                        <input type="text" id="in" name="in" class="form-control" value="{{ user.in }}">
+                        <br>
+
+                        <div class="col-md-4">
+                            <img id="photo" src="/img/users/{{ user.photo }}" alt="Profile Photo" width="300px" />
+                            <input type='file' onchange="readURL(this);" name="photo" value="{{ user.photo }}" />
+
+                            
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button class="btn btn-unique" type="submit">Save</button>
+                        </div>
+                    </form>
+                    <!-- Default form register -->
+
+                    <hr>
+
+                </div>
+
+            </div>
+            <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+@endsection
+
+@section('script')
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#photo')
+                    .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+@endsection

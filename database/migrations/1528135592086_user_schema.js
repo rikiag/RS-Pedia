@@ -10,7 +10,7 @@ class UserSchema extends Schema {
       table.string('fb')
       table.string('tw')
       table.string('ig')
-      table.string('ii')
+      table.string('in')
 
     })
   }
