@@ -56,16 +56,16 @@
                             <div class="card-header font-weight-bold">
                                 <span>About author</span>
                                 <span class="pull-right">
-                                    <a href="">
+                                    <a href="{{ author.fb }}" target="_blank">
                                         <i class="fa fa-facebook mr-2"></i>
                                     </a>
-                                    <a href="">
+                                    <a href="{{ author.tw }}" target="_blank">
                                         <i class="fa fa-twitter mr-2"></i>
                                     </a>
-                                    <a href="">
+                                    <a href="{{ author.ig }}" target="_blank">
                                         <i class="fa fa-instagram mr-2"></i>
                                     </a>
-                                    <a href="">
+                                    <a href="{{ author.in }}" target="_blank">
                                         <i class="fa fa-linkedin mr-2"></i>
                                     </a>
                                 </span>
@@ -75,15 +75,12 @@
                             <div class="card-body">
 
                                 <div class="media d-block d-md-flex mt-3">
-                                    <img class="d-flex mb-3 mx-auto z-depth-1" src="/img/img (30).jpg" alt="Generic placeholder image"
+                                    <img class="d-flex mb-3 mx-auto z-depth-1" src="/img/users/{{ author.photo }}" alt="Generic placeholder image"
                                         style="width: 100px;">
                                     <div class="media-body text-center text-md-left ml-md-3 ml-0">
                                         <h5 class="mt-0 font-weight-bold">{{ author.username }}
                                         </h5>
-                                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
-                                        quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
-                                        similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum
-                                        fuga.
+                                        {{ author.desc }}
                                     </div>
                                 </div>
 
